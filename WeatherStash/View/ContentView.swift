@@ -8,9 +8,28 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var toogleSearchLocation = false
+    @ObservedObject var locationService = LocationService()
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        NavigationView {
+            VStack {
+                
+            }
+            .toolbar(content: {
+                Button(action: {
+                    toogleSearchLocation.toggle()
+                }, label: {
+                    Image(systemName: "magnifyingglass")
+                        .resizable()
+                        .frame(width: 30, height: 30, alignment: .trailing)
+                })
+            })
+        }
+        .sheet(isPresented: $toogleSearchLocation, content: {
+            SearchView(locationService: locationService)
+        })
     }
 }
 
