@@ -15,13 +15,7 @@ struct SearchView: View {
                 SearchBar(locationService: locationService)
                 
                 List(locationService.searchResults, id: \.key) { result in
-                    VStack(alignment: .leading) {
-                        Text(result.localizedName)
-                            .foregroundColor(.primary)
-                        Text("\(result.administrativeArea.localizedName), \(result.country.localizedName)")
-                            .font(.callout)
-                            .foregroundColor(.secondary)
-                    }
+                    CityCell(location: result)
                 }
             }
             .navigationTitle("Search Location")
