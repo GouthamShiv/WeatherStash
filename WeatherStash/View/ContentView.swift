@@ -15,7 +15,9 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                
+                if let location = locationService.selectedLocation {
+                    Text("Key: \(location.key) - Name: \(location.localizedName)")
+                }
             }
             .toolbar(content: {
                 Button(action: {

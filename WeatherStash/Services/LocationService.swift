@@ -9,6 +9,7 @@ import Foundation
 
 class LocationService: ObservableObject {
     @Published var searchResults = [Location]()
+    @Published var selectedLocation: Location?
     
     var searchQuery = "" {
         didSet {
