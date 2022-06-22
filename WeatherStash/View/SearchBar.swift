@@ -32,6 +32,11 @@ struct SearchBar: View {
                     .opacity(searchText == "" ? 0 : 1)
             })
         }
+        .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
+        .foregroundColor(.gray)
+        .background(Color(.secondarySystemBackground))
+        .cornerRadius(10.0)
+        .padding(10.0)
     }
 }
 
