@@ -8,7 +8,7 @@
 import Foundation
 
 struct Location: Codable, Identifiable {
-    var id = UUID().uuidString
+    var id: String? = UUID().uuidString
     
     let key: String
     let localizedName: String

@@ -13,6 +13,10 @@ struct SearchView: View {
         NavigationView {
             VStack {
                 SearchBar(locationService: locationService)
+                
+                List(locationService.searchResults, id: \.key) { result in
+                    Text(result.localizedName)
+                }
             }
             .navigationTitle("Search Location")
         }

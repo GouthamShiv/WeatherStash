@@ -12,7 +12,9 @@ class LocationService: ObservableObject {
     
     var searchQuery = "" {
         didSet {
-            searchLocation()
+            if !searchQuery.isEmpty {
+                searchLocation()
+            }
         }
     }
     
