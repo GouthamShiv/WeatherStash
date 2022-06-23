@@ -17,6 +17,8 @@ class LocationService: ObservableObject {
         }
     }
     @Published var currentWeather: CurrentWeather?
+    @Published var hourlyForecast = [CurrentWeatherHourly]()
+    @Published var forecasts = [Forecast]()
     
     var searchQuery = "" {
         didSet {
@@ -77,6 +79,64 @@ class LocationService: ObservableObject {
                 let response = try JSONDecoder().decode([CurrentWeather].self, from: data).first
                 DispatchQueue.main.async {
                     self?.currentWeather = response
+                }
+            }
+            catch let error {
+                print("⛔️ Error parsing current weather: \(error.localizedDescription)")
+            }
+        }.resume()
+    }
+    
+    func getHourlyForecasts() {
+        guard let query = selectedLocation,
+              let url = URL(string: "\(Config.AccuWeather.forecast12Hours)/\(query.key)?metric=true?apikey=\(Config.AccuWeather.apiKey)")
+        else {
+            return
+        }
+        
+        let request = URLRequest(url: url)
+        
+        URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            guard let data = data else { return }
+            do {
+                let response = try JSONDecoder().decode([CurrentWeatherHourly].self, from: data)
+                DispatchQueue.main.async {
+                    self?.hourlyForecast = response
+                }
+            }
+            catch let error {
+                print("⛔️ Error parsing current weather: \(error.localizedDescription)")
+            }
+        }.resume()
+    }
+    
+    func getForecasts() {
+        guard let query = selectedLocation,
+              let url = URL(string: "\(Config.AccuWeather.forecast5days)/\(query.key)?metric=true?apikey=\(Config.AccuWeather.apiKey)")
+        else {
+            return
+        }
+        
+        let request = URLRequest(url: url)
+        
+        URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            guard let data = data else { return }
+            do {
+                let response = try JSONDecoder().decode(ForecastResponse.self, from: data)
+                let forecasts = response.dailyForecasts
+                
+                DispatchQueue.main.async {
+                    self?.forecasts = forecasts
                 }
             }
             catch let error {
