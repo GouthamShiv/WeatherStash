@@ -13,6 +13,8 @@ class LocationService: ObservableObject {
         didSet {
             if let _ = selectedLocation {
                 getCurrentCondition()
+                getHourlyForecasts()
+                getForecasts()
             }
         }
     }
@@ -24,6 +26,8 @@ class LocationService: ObservableObject {
         didSet {
             if !searchQuery.isEmpty {
                 searchLocation()
+            } else {
+                searchResults.removeAll()
             }
         }
     }
