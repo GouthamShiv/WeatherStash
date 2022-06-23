@@ -16,14 +16,16 @@ struct ContentView: View {
         GeometryReader { geo in
             NavigationView {
                 ZStack(alignment: .center) {
-                    Image("bgDay")
+                    Image(locationService.currentWeather?.isDayTime ?? true ? "bgDay" : "bgNight")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .edgesIgnoringSafeArea(.all)
                     
                     VStack {
-                        if let location = locationService.selectedLocation {
-                            Text("Key: \(location.key) - Name: \(location.localizedName)")
+                        if let location = locationService.selectedLocation,
+                           let weather = locationService.currentWeather {
+                            //                            Text("Key: \(location.key) - Name: \(location.localizedName)")
+                            CurrentWeatherView(city: location.localizedName, weather: weather)
                         }
                     }
                     .toolbar(content: {
@@ -32,7 +34,8 @@ struct ContentView: View {
                         }, label: {
                             Image(systemName: "magnifyingglass")
                                 .resizable()
-                                .frame(width: 30, height: 30, alignment: .trailing)
+                                .frame(width: 20, height: 20, alignment: .trailing)
+                                .foregroundColor(.white)
                         })
                     })
                 }

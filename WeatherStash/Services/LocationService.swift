@@ -9,7 +9,14 @@ import Foundation
 
 class LocationService: ObservableObject {
     @Published var searchResults = [Location]()
-    @Published var selectedLocation: Location?
+    @Published var selectedLocation: Location? {
+        didSet {
+            if let _ = selectedLocation {
+                getCurrentCondition()
+            }
+        }
+    }
+    @Published var currentWeather: CurrentWeather?
     
     var searchQuery = "" {
         didSet {
@@ -25,7 +32,7 @@ class LocationService: ObservableObject {
         guard let query = searchQuery
             .trimmingCharacters(in: .whitespacesAndNewlines)
             .addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
-                let url = URL(string: "\(Config.AccuWeather.autocomplete)?apikey=\(Config.AccuWeather.apiKey)&q=\(query)")
+              let url = URL(string: "\(Config.AccuWeather.autocomplete)?apikey=\(Config.AccuWeather.apiKey)&q=\(query)")
         else {
             return
         }
@@ -46,6 +53,34 @@ class LocationService: ObservableObject {
             }
             catch let error {
                 print("⛔️ Error parsing location: \(error.localizedDescription)")
+            }
+        }.resume()
+    }
+    
+    func getCurrentCondition() {
+        guard let query = selectedLocation,
+              let url = URL(string: "\(Config.AccuWeather.currentConditions)/\(query.key)?apikey=\(Config.AccuWeather.apiKey)")
+        else {
+            return
+        }
+        
+        let request = URLRequest(url: url)
+        
+        URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            guard let data = data else { return }
+            do {
+                let response = try JSONDecoder().decode([CurrentWeather].self, from: data).first
+                DispatchQueue.main.async {
+                    self?.currentWeather = response
+                }
+            }
+            catch let error {
+                print("⛔️ Error parsing current weather: \(error.localizedDescription)")
             }
         }.resume()
     }
