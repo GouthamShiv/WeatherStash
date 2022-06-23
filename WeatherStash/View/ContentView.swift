@@ -13,25 +13,34 @@ struct ContentView: View {
     @ObservedObject var locationService = LocationService()
     
     var body: some View {
-        NavigationView {
-            VStack {
-                if let location = locationService.selectedLocation {
-                    Text("Key: \(location.key) - Name: \(location.localizedName)")
-                }
-            }
-            .toolbar(content: {
-                Button(action: {
-                    toogleSearchLocation.toggle()
-                }, label: {
-                    Image(systemName: "magnifyingglass")
+        GeometryReader { geo in
+            NavigationView {
+                ZStack(alignment: .center) {
+                    Image("bgDay")
                         .resizable()
-                        .frame(width: 30, height: 30, alignment: .trailing)
+                        .aspectRatio(contentMode: .fill)
+                        .edgesIgnoringSafeArea(.all)
+                    
+                    VStack {
+                        if let location = locationService.selectedLocation {
+                            Text("Key: \(location.key) - Name: \(location.localizedName)")
+                        }
+                    }
+                    .toolbar(content: {
+                        Button(action: {
+                            toogleSearchLocation.toggle()
+                        }, label: {
+                            Image(systemName: "magnifyingglass")
+                                .resizable()
+                                .frame(width: 30, height: 30, alignment: .trailing)
+                        })
+                    })
+                }
+                .sheet(isPresented: $toogleSearchLocation, content: {
+                    SearchView(locationService: locationService)
                 })
-            })
+            }
         }
-        .sheet(isPresented: $toogleSearchLocation, content: {
-            SearchView(locationService: locationService)
-        })
     }
 }
 
