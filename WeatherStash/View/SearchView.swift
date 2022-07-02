@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchView: View {
     @ObservedObject var locationService: LocationService
     @Environment(\.presentationMode) var presentationMode
-
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -30,6 +30,6 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView(locationService: LocationService())
+        SearchView(locationService: LocationService(measurementType: MeasurementType(option: .metric)))
     }
 }

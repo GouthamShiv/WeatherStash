@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct WeatherStashApp: App {
+    let measurementType = MeasurementType(option: .metric)
+
     var body: some Scene {
+        let locationService = LocationService(measurementType: measurementType)
         WindowGroup {
-            ContentView()
+            ContentView(locationService: locationService)
+                .environmentObject(measurementType)
         }
     }
 }

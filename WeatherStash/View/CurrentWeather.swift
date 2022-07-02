@@ -98,4 +98,11 @@ extension CurrentWeather {
                                 metric: TemperatureValue(value: 23, unit: "C"),
                                 imperial: TemperatureValue(value: 73.4, unit: "F")))
     }
+    func temperatureValue(for measurementType: MeasurementType) -> TemperatureValue {
+        if measurementType.option == .imperial {
+            return self.temperature.imperial
+        }
+        
+        return self.temperature.metric
+    }
 }

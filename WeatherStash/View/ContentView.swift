@@ -10,7 +10,8 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var toogleSearchLocation = false
-    @ObservedObject var locationService = LocationService()
+    @ObservedObject var locationService: LocationService
+    @EnvironmentObject var measurementType: MeasurementType
     
     var body: some View {
         GeometryReader { geo in
@@ -39,6 +40,30 @@ struct ContentView: View {
                             
                             FiveDayForecaseView(forecasts: locationService.forecasts)
                             
+                            Divider()
+                                .background(Color.white)
+                            
+                            HStack {
+                                Spacer()
+                                
+                                Button(action: {
+                                    measurementType.option = measurementType.option == .metric ?
+                                        .imperial :
+                                        .metric
+                                    locationService.measurementType = measurementType
+                                },
+                                       label: {
+                                    HStack(spacing: 0) {
+                                        Text("°C")
+                                            .opacity(measurementType.option == .metric ? 1 : 0.5)
+                                        Text("/")
+                                        Text("°F")
+                                            .opacity(measurementType.option == .imperial ? 1 : 0.5)
+                                    }
+                                })
+                                .font(.headline)
+                                .padding(.trailing, 15)
+                            }
                             Spacer()
                         }
                         else {
@@ -76,6 +101,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(locationService: LocationService(measurementType: MeasurementType(option: .metric)))
     }
 }

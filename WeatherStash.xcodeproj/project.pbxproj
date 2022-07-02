@@ -24,6 +24,7 @@
 		6DC7D8DC2861A95900E54DEB /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC7D8DB2861A95900E54DEB /* SearchView.swift */; };
 		6DC7D8DE2861A96700E54DEB /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC7D8DD2861A96700E54DEB /* SearchBar.swift */; };
 		6DC7D8E12861A9BB00E54DEB /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC7D8E02861A9BB00E54DEB /* LocationService.swift */; };
+		6DE6E1282870A32D00485A2B /* MeasurementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE6E1272870A32D00485A2B /* MeasurementType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		6DC7D8DB2861A95900E54DEB /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		6DC7D8DD2861A96700E54DEB /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		6DC7D8E02861A9BB00E54DEB /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		6DE6E1272870A32D00485A2B /* MeasurementType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementType.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				6D6664CB2860EEB900903D7B /* Location.swift */,
 				6D492FBC2864512600A5C7C9 /* CurrentWeather.swift */,
 				6D492FC22864673300A5C7C9 /* Forecast.swift */,
+				6DE6E1272870A32D00485A2B /* MeasurementType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 				6D9E34BA2863035D0071061E /* CityCell.swift in Sources */,
 				6D492FC32864673300A5C7C9 /* Forecast.swift in Sources */,
 				6D492FBF2864579E00A5C7C9 /* CurrentWeatherView.swift in Sources */,
+				6DE6E1282870A32D00485A2B /* MeasurementType.swift in Sources */,
 				6D7E6DA82860650D00BFD2EC /* ContentView.swift in Sources */,
 				6D492FBD2864512700A5C7C9 /* CurrentWeather.swift in Sources */,
 				6D7E6DA62860650D00BFD2EC /* WeatherStashApp.swift in Sources */,

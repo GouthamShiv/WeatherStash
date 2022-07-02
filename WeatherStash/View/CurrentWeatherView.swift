@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct CurrentWeatherView: View {
+    @EnvironmentObject var measurementType: MeasurementType
+    
     var city: String
     var weather: CurrentWeather
     var hlForecast: Forecast?
-
+    
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
             Text(city)
@@ -22,8 +24,11 @@ struct CurrentWeatherView: View {
             
             Spacer()
             
-            Text(Helper.temperatureDisplay(value: weather.temperature.metric.value, unit: .celsius) + weather.temperature.metric.unit)
-                .font(.custom("HelveticaNeue-Light", size: 60))
+            HStack {
+                Text(Helper.temperatureDisplay(value: weather.temperatureValue(for: measurementType).value, unit: measurementType.option.unitTemperature))
+                Text(weather.temperatureValue(for: measurementType).unit)
+            }
+            .font(.custom("HelveticaNeue-Light", size: 60))
             
             if let forecast = hlForecast {
                 Text("H:\(Helper.temperatureDisplay(value: forecast.temprature.maximum.value, unit: .celsius)) L:\(Helper.temperatureDisplay(value: forecast.temprature.minimum.value, unit: .celsius))")

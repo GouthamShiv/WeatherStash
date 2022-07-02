@@ -42,6 +42,6 @@ struct SearchBar: View {
 
 struct SearchBar_Previews: PreviewProvider {
     static var previews: some View {
-        SearchBar(locationService: LocationService())
+        SearchBar(locationService: LocationService(measurementType: MeasurementType(option: .metric)))
     }
 }
