@@ -20,12 +20,15 @@ struct ContentView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .edgesIgnoringSafeArea(.all)
+                        .frame(width: geo.size.width, height: geo.size.height)
                     
                     VStack {
                         if let location = locationService.selectedLocation,
                            let weather = locationService.currentWeather {
-                            //                            Text("Key: \(location.key) - Name: \(location.localizedName)")
-                            CurrentWeatherView(city: location.localizedName, weather: weather)
+                            // Text("Key: \(location.key) - Name: \(location.localizedName)")
+                            CurrentWeatherView(city: location.localizedName,
+                                               weather: weather,
+                                               hlForecast: locationService.forecasts.first)
                             Divider()
                                 .background(Color.white)
                             
@@ -33,8 +36,25 @@ struct ContentView: View {
                             
                             Divider()
                                 .background(Color.white)
+                            
+                            FiveDayForecaseView(forecasts: locationService.forecasts)
+                            
+                            Spacer()
+                        }
+                        else {
+                            VStack(alignment: .center, spacing: 20) {
+                                Image(systemName: "thermometer")
+                                    .resizable()
+                                    .frame(width: 60, height: 100, alignment: .center)
+                                
+                                Text("Search for a city to display the weather")
+                            }
+                            .frame(width: geo.size.width)
+                            
+                            Spacer()
                         }
                     }
+                    .foregroundColor(.white)
                     .toolbar(content: {
                         Button(action: {
                             toogleSearchLocation.toggle()

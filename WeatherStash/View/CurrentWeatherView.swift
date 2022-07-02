@@ -10,6 +10,7 @@ import SwiftUI
 struct CurrentWeatherView: View {
     var city: String
     var weather: CurrentWeather
+    var hlForecast: Forecast?
 
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -19,8 +20,16 @@ struct CurrentWeatherView: View {
             Text(weather.weatherText)
                 .font(.callout)
             
+            Spacer()
+            
             Text(Helper.temperatureDisplay(value: weather.temperature.metric.value, unit: .celsius) + weather.temperature.metric.unit)
                 .font(.custom("HelveticaNeue-Light", size: 60))
+            
+            if let forecast = hlForecast {
+                Text("H:\(Helper.temperatureDisplay(value: forecast.temprature.maximum.value, unit: .celsius)) L:\(Helper.temperatureDisplay(value: forecast.temprature.minimum.value, unit: .celsius))")
+                    .font(.callout)
+            }
+            Spacer()
         }
         .frame(height: 160)
     }
