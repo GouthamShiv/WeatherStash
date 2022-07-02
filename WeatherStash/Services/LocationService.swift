@@ -93,7 +93,7 @@ class LocationService: ObservableObject {
     
     func getHourlyForecasts() {
         guard let query = selectedLocation,
-              let url = URL(string: "\(Config.AccuWeather.forecast12Hours)/\(query.key)?metric=true?apikey=\(Config.AccuWeather.apiKey)")
+              let url = URL(string: "\(Config.AccuWeather.forecast12Hours)/\(query.key)?metric=true&apikey=\(Config.AccuWeather.apiKey)")
         else {
             return
         }
@@ -121,7 +121,7 @@ class LocationService: ObservableObject {
     
     func getForecasts() {
         guard let query = selectedLocation,
-              let url = URL(string: "\(Config.AccuWeather.forecast5days)/\(query.key)?metric=true?apikey=\(Config.AccuWeather.apiKey)")
+              let url = URL(string: "\(Config.AccuWeather.forecast5days)/\(query.key)?metric=true&apikey=\(Config.AccuWeather.apiKey)")
         else {
             return
         }

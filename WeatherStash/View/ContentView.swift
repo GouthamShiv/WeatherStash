@@ -26,6 +26,13 @@ struct ContentView: View {
                            let weather = locationService.currentWeather {
                             //                            Text("Key: \(location.key) - Name: \(location.localizedName)")
                             CurrentWeatherView(city: location.localizedName, weather: weather)
+                            Divider()
+                                .background(Color.white)
+                            
+                            HourlyForecastView(hourlyForecasts: locationService.hourlyForecast)
+                            
+                            Divider()
+                                .background(Color.white)
                         }
                     }
                     .toolbar(content: {

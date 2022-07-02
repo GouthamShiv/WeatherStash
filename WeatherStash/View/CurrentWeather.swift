@@ -7,6 +7,16 @@
 
 import Foundation
 
+enum IconType: String {
+    case sunny
+    case partlySunny
+    case partlyCloudy
+    case rain
+    case clear
+    case snow
+    case unknown
+}
+
 struct CurrentWeather: Codable {
     
     let weatherText: String
