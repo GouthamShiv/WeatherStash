@@ -65,8 +65,8 @@
 			isa = PBXGroup;
 			children = (
 				6D7E6DC12860767000BFD2EC /* .gitignore */,
-				6D7E6DA42860650D00BFD2EC /* WeatherStash */,
 				6D7E6DA32860650D00BFD2EC /* Products */,
+				6D7E6DA42860650D00BFD2EC /* WeatherStash */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,11 +81,11 @@
 		6D7E6DA42860650D00BFD2EC /* WeatherStash */ = {
 			isa = PBXGroup;
 			children = (
-				6D9E34B82862FAC20071061E /* Info.plist */,
-				6DC7D8DF2861A98500E54DEB /* Services */,
 				6D7E6DB32860652F00BFD2EC /* App */,
+				6D9E34B82862FAC20071061E /* Info.plist */,
 				6D7E6DB42860654800BFD2EC /* Model */,
 				6D7E6DAB2860651300BFD2EC /* Preview Content */,
+				6DC7D8DF2861A98500E54DEB /* Services */,
 				6D7E6DB52860655D00BFD2EC /* View */,
 			);
 			path = WeatherStash;
